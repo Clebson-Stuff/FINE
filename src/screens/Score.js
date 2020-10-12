@@ -1,6 +1,36 @@
+/* eslint-disable react-native/no-inline-styles */
+/* eslint-disable react/jsx-no-comment-textnodes */
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
-import {Button} from 'react-native-paper';
+import {SafeAreaView, View, FlatList, StyleSheet, Text} from 'react-native';
+import {Button, Title, Card, List, ProgressBar} from 'react-native-paper';
+
+const DATA = [
+  {
+    id: 1,
+    title: 'Teste1',
+    imgUrl: 'www',
+  },
+  {
+    id: 2,
+    title: 'Teste1',
+    imgUrl: 'www',
+  },
+  {
+    id: 3,
+    title: 'Teste1',
+    imgUrl: 'www',
+  },
+  {
+    id: 4,
+    title: 'Teste1',
+    imgUrl: 'www',
+  },
+  {
+    id: 5,
+    title: 'Teste1',
+    imgUrl: 'www',
+  },
+];
 
 export default function Score() {
   return (
@@ -13,18 +43,66 @@ export default function Score() {
         <View style={styles.title}>
           <Text style={styles.h1}>Score</Text>
         </View>
-        <View style={styles.score}></View>
+        <View style={styles.score}>
+          <List.Icon color={'#E4101F'} icon="cash-usd" />
+          <Text style={styles.scoreCont}>3000</Text>
+          <View style={{width: '100%'}}>
+            <ProgressBar
+              style={styles.progress}
+              progress={0.5}
+              color={'#E4101F'}
+            />
+          </View>
+        </View>
         <View style={styles.scoreFeatures}>
           <Button mode="contained" onPress={() => console.log('Pressed')}>
             Ranking
           </Button>
+          <FlatList
+            horizontal={true}
+            data={DATA}
+            renderItem={({item}) => renderItens(item)}
+            ItemSeparatorComponent={() => {
+              return (
+                <View
+                  // eslint-disable-next-line react-native/no-inline-styles
+                  style={{
+                    height: '100%',
+                    width: 20,
+                  }}
+                />
+              );
+            }}
+            keyExtractor={(item, id) => id.toString()}
+          />
         </View>
       </View>
     </View>
   );
 }
 
+const renderItens = ({item}) => {
+  return (
+    <Card style={styles.card}>
+      <Card.Cover
+        style={{height: '80%'}}
+        source={{uri: 'https://picsum.photos/700'}}
+      />
+      <Card.Content>
+        <Title>Card title</Title>
+      </Card.Content>
+    </Card>
+  );
+};
+
 const styles = StyleSheet.create({
+  card: {
+    width: 150,
+  },
+  progress: {
+    width: '100%',
+    height: 40,
+  },
   container: {
     flex: 1,
   },
@@ -53,7 +131,12 @@ const styles = StyleSheet.create({
     width: '90%',
     flex: 1,
     alignSelf: 'center',
+    alignItems: 'center',
     paddingBottom: 50,
+  },
+  scoreCont: {
+    fontSize: 42,
+    color: '#E4101F',
   },
   backward: {
     zIndex: 0,
