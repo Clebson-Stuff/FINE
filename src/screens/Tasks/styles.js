@@ -5,20 +5,22 @@ const styles = StyleSheet.create({
     flex: 1
   },
   text: {
-    fontWeight: 'bold',
-    fontSize: 18,
+    margin: 30,
+  },
+  textContent: {
+    fontSize: 40,
     textAlign: 'left'
   },
   itemStyle: {
-    flex: 1
+    flex: 1,
   },
   contentIcon: {
     flex: 1,
     flexDirection: 'row',
+    margin: 2
   },
   button: {
     alignItems: 'center',
-    padding: 10
   },
   textItem: {
     fontWeight: 'bold',

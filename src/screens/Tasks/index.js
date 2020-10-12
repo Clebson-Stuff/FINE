@@ -3,20 +3,22 @@ import {
   View,
   FlatList,
   Dimensions,
+  TouchableOpacity,
+  Image,
   Text
 } from 'react-native'
 
-import { Icon } from 'react-native-elements'
+import { List } from 'react-native-paper'
 
-import { colors } from '../../styles/colors';
+import colors from '/home/josinaldo/WorkStation/LedThink/FINTIC/src/styles/colors.js'
 
 import styles from './styles'
 
 export default function Task() {
 
-  const [ oneCrownColor, setOneCrownColor ] = useState(colors.colorIconDefault)
-  const [ secondCrownColor, setSecondCrownColor ] = useState(colors.colorIconDefault)
-  const [ thirdCrownColor, setThirdCrownColor ] = useState(colors.colorIconDefault)
+  const [oneCrownColor, setOneCrownColor] = useState(colors.colorIconDefault)
+  const [secondCrownColor, setSecondCrownColor] = useState(colors.colorIconDefault)
+  const [thirdCrownColor, setThirdCrownColor] = useState(colors.colorIconDefault)
 
   const dataList = [
     {
@@ -48,65 +50,69 @@ export default function Task() {
       text: "Tarefa 6",
       level: 2,
       image: require('../../assets/images/image.jpg')
-    }
+    },
   ]
-
-  formData = (dataList, numColumns) => {
-    const totalRows = Math.floor(dataList.length/numColumns)
-    let totalLastRow = dataList.length - (totalRows * numColumns)
-
-    while(totalLastRow !== 0 && totalLastRow !== numColumns) {
-      dataList.push({text: "empty", empty: true})
-    }
-    return dataList
-  }
 
   const numColumns = 2
   const ITEM_WIDTH = Dimensions.get('window'
   ).width
 
-  _renderItem = ({item, index}) => {
-    useEffect(() => {
-      if(item.level === 1) {
-        setOneCrownColor(colors.colorIconLevel)
-      }
-      if(item.level === 2) {
-        setSecondCrownColor(colors.colorIconLevel)
-      }
-      if(item.level === 3) {
-        setThirdCrownColor(colors.colorIconLevel)
-      }
-    },[]);
+  const formData = (dataList, numColumns) => {
+    const totalRows = Math.floor(dataList.length / numColumns)
+    let totalLastRow = dataList.length - (totalRows * numColumns)
 
-    if(item.empty) {
-      return <View style={[styles.itemStyle,styles.itemInvisible]}/>
+    while (totalLastRow !== 0 && totalLastRow !== numColumns) {
+      dataList.push({ text: "empty", empty: true })
+    }
+    return dataList
+  }
+
+  useEffect(() => {
+    setOneCrownColor(colors.colorIconDefault),
+      setSecondCrownColor(colors.colorIconDefault),
+      setThirdCrownColor(colors.colorIconDefault)
+  }, []);
+
+  const _renderItem = ({ item, index }) => {
+    if (item.level === 1) {
+      setOneCrownColor(colors.colorIconLevel)
+    }
+    if (item.level === 2) {
+      setSecondCrownColor(colors.colorIconLevel)
+    }
+    if (item.level === 3) {
+      setThirdCrownColor(colors.colorIconLevel)
+    }
+
+    if (item.empty) {
+      return <View style={styles.itemInvisible} />
     }
 
     return (
       <View style={styles.itemStyle}>
         <TouchableOpacity style={styles.button}>
-          <View style={{width: 100, height: ITEM_WIDTH}}>
-            <Image source={item.image}/>
-            <Text>{item.text}</Text>
-            <View style={styles.contentIcon}> 
-              <Icon name='crown' color={oneCrownColor}/>
-              <Icon name='crown' color={secondCrownColor}/>
-              <Icon name='crown' color={thirdCrownColor}/>
-            </View>
+          <Image style={{ width: ITEM_WIDTH / 3, height: 100 }} source={item.image} />
+          <Text>{item.text}</Text>
+          <View style={styles.contentIcon}>
+            <List.Icon icon="crown" color={oneCrownColor} />
+            <List.Icon icon="crown" color={secondCrownColor} />
+            <List.Icon icon="crown" color={thirdCrownColor} />
           </View>
         </TouchableOpacity>
       </View>
     );
   }
 
-  return(
+  return (
     <View style={styles.container} >
-      <Text style={styles.text}>Tarefas</Text>
-      <FlatList 
-        data={this.formData(dataList, numColumns)}
-        renderItem={this._renderItem}
-        keyExtractor = {(item, index)=> index.toString()}
-        numColumns = {numColumns}
+      <View style={styles.text}>
+        <Text style={styles.textContent}>Tarefas</Text>
+      </View>
+      <FlatList
+        data={formData(dataList, numColumns)}
+        renderItem={_renderItem}
+        keyExtractor={(item, index) => index.toString()}
+        numColumns={numColumns}
       />
     </View>
   );

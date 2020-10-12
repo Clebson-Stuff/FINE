@@ -7,7 +7,7 @@ const DashboardRoute = () => <Text>oi</Text>;
 
 const ScoreRoute = () => <Score />;
 
-const TarefasRoute = () => <Text>oi</Text>;
+const TarefasRoute = () => <Tasks />;
 
 const ContaRoute = () => <Text>oi</Text>;
 
