@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {BottomNavigation, Text} from 'react-native-paper';
 import Score from '../Score';
+import Tasks from '../Tasks'
 
 const DashboardRoute = () => <Text>oi</Text>;
 

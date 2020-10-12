@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {DefaultTheme, Provider as PaperProvider} from 'react-native-paper';
+import { Provider as PaperProvider} from 'react-native-paper';
 import {AppRegistry} from 'react-native';
 import App from './src/screens/main/main';
 import {name as appName} from './app.json';
