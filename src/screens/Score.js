@@ -2,7 +2,7 @@
 /* eslint-disable react/jsx-no-comment-textnodes */
 import React from 'react';
 import {SafeAreaView, View, FlatList, StyleSheet, Text} from 'react-native';
-import {Button, Title, Card, List, ProgressBar} from 'react-native-paper';
+import {Button, Title, Card, List, ProgressBar, Colors} from 'react-native-paper';
 
 const DATA = [
   {
@@ -46,7 +46,11 @@ export default function Score() {
         <View style={styles.score}>
           <List.Icon color={'#E4101F'} icon="cash-usd" />
           <Text style={styles.scoreCont}>3000</Text>
-          <View style={{width: '100%'}}>
+          <View style={styles.textContent}>
+            <View><Text style={styles.textInfo}>Meta:</Text></View>
+            <View><Text style={styles.textInfo}>                                                          2000</Text></View> 
+          </View>
+          <View style={{width: '90%'}}>
             <ProgressBar
               style={styles.progress}
               progress={0.5}
@@ -58,6 +62,7 @@ export default function Score() {
           <Button mode="contained" onPress={() => console.log('Pressed')}>
             Ranking
           </Button>
+          <Text style={styles.beneficio}>Benefícios</Text>
           <FlatList
             horizontal={true}
             data={DATA}
@@ -96,12 +101,25 @@ const renderItens = ({item}) => {
 };
 
 const styles = StyleSheet.create({
+  beneficio: {
+    fontSize: 24,
+    margin: 10
+  },
   card: {
     width: 150,
   },
+  textContent: {
+    alignContent: 'space-between',
+    flexDirection: 'row',
+    padding: 10,
+  },
+  textInfo: {
+    color: Colors.white,
+  },
   progress: {
     width: '100%',
-    height: 40,
+    height: 15,
+    borderRadius: 8,
   },
   container: {
     flex: 1,
